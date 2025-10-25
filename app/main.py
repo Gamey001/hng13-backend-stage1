@@ -13,6 +13,10 @@ app = FastAPI(title="String Analyzer API (PostgreSQL)")
 def on_startup():
     init_db()
 
+@app.get("/")
+def root():
+    return {"message": "FastAPI app running successfully 🚀"}
+
 @app.post("/strings", status_code=status.HTTP_201_CREATED)
 def analyze_string(payload: dict, session: Session = Depends(get_session)):
     if "value" not in payload:
